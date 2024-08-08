@@ -25,10 +25,18 @@ class DB:
         for row in rows:
             print(row)
 
+    def condition_search(self, query, data):
+        self.query = query
+        self.data = data
+        self.cur.execute(query, data)
+        rows = self.cur.fetchall()
+        for row in rows:
+            print(row)
+
     def insert_data(self, query, data):
         self.query = query
         self.data = data
-        self.cur.execute(insert_sql, data)
+        self.cur.execute(query, data)
         self.conn.commit()
 
 
@@ -43,11 +51,15 @@ def button_signup(user_name, user_pass, user_birthdate, gender):
     VALUES (?, ?, ?, ?);
     '''
     data = (user_name, user_pass, user_birthdate, gender)
+    db_conn.insert_data(insert_sql, data)
 
 
 @eel.expose
 def button_login(user_name, user_pass):
-    print(user_name, user_pass)
+    sql = '''SELECT * FROM login WHERE email = ? AND password = ?'''
+    data = (user_name,user_pass)
+    db_conn.condition_search(sql, data)
+    # print(data)
 
 
 select_sql = 'SELECT * FROM login;'
