@@ -11,7 +11,7 @@ try {
         if(!result){
         alert("Your Email ID already Exist!")}
         else{
-        alert("You Can Login.")}})
+        window.location.href = '../src/components/login_page.html';}})
     })
 } catch (error) {
     let login = document.querySelector('.login')
