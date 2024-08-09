@@ -17,6 +17,10 @@ try {
     let login = document.querySelector('.login')
     login.addEventListener('submit',(e)=>{
         e.preventDefault()
-        eel.button_login(user_name.value,user_pass.value)
+        eel.button_login(user_name.value,user_pass.value)(function(result){
+        if(!result){
+        alert("Your Email and Password Wrong!")}
+        else{
+        alert("Welcome, Home Maintenance and Repair Tracker")}})
     })
 }

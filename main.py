@@ -70,9 +70,10 @@ def button_signup(user_name, user_pass, user_birthdate, gender):
 def button_login(user_name, user_pass):
     sql = '''SELECT * FROM login WHERE email = ? AND password = ?'''
     data = (user_name, user_pass)
-    db_conn.condition_search(sql, data)
-    # print(data)
-
+    if db_conn.sql_data_check(sql, data):
+        return True
+    else:
+        return False
 
 select_sql = 'SELECT * FROM login;'
 db_conn.search_file(select_sql)
