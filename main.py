@@ -39,6 +39,13 @@ class DB:
         self.cur.execute(query, data)
         self.conn.commit()
 
+    def sql_data_check(self, query, data):
+        self.query = query
+        self.data = data
+        self.cur.execute(query, data)
+        rows = self.cur.fetchall()
+        return rows
+
 
 eel.init('Web')
 db_conn = DB()
@@ -46,18 +53,23 @@ db_conn = DB()
 
 @eel.expose
 def button_signup(user_name, user_pass, user_birthdate, gender):
-    insert_sql = '''
-    INSERT INTO login (email, password, birthdate, gender)
-    VALUES (?, ?, ?, ?);
-    '''
-    data = (user_name, user_pass, user_birthdate, gender)
-    db_conn.insert_data(insert_sql, data)
-
+    email = user_name
+    sql_query = '''SELECT * FROM login WHERE email = (?)'''
+    if db_conn.sql_data_check(sql_query, (email,)):
+        return False
+    else:
+        insert_sql = '''
+        INSERT INTO login (email, password, birthdate, gender)
+        VALUES (?, ?, ?, ?);
+        '''
+        data = (user_name, user_pass, user_birthdate, gender)
+        db_conn.insert_data(insert_sql, data)
+        return True
 
 @eel.expose
 def button_login(user_name, user_pass):
     sql = '''SELECT * FROM login WHERE email = ? AND password = ?'''
-    data = (user_name,user_pass)
+    data = (user_name, user_pass)
     db_conn.condition_search(sql, data)
     # print(data)
 

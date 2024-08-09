@@ -6,7 +6,12 @@ let from = document.querySelector('.form')
 try {
     from.addEventListener('submit',(e)=>{
         e.preventDefault()
-        eel.button_signup(user_name.value, user_pass.value,user_birthdate.value,gender.value)
+//        eel.button_signup(user_name.value, user_pass.value,user_birthdate.value,gender.value)
+        eel.button_signup(user_name.value, user_pass.value,user_birthdate.value,gender.value)(function(result){
+        if(!result){
+        alert("Your Email ID already Exist!")}
+        else{
+        alert("You Can Login.")}})
     })
 } catch (error) {
     let login = document.querySelector('.login')
