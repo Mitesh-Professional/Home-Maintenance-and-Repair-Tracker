@@ -7,24 +7,41 @@ body{
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content:end;
     align-items: center;
-    background-color: #F2D2BD;
+    /* background-color: #F2D2BD; */
+    background-image: url(../publics/assets/login-bg.jpg);
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.Heading{
+    position: absolute;
+    font-size: 20px;
+    top: 20px;
+    right: 20px;
+    color: white;
+    text-align: right;
+    font-family: sans-serif;
 }
 .form,.login{
     padding: 20px 20px;
-    background: #861332;    
+    /* background: #861332;*/
+    background: transparent;
+    color: white;
     border-radius: 20px;
     width: 400px;
+    margin-right: 100px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}   
+}
 .h1_div{
     text-align: center;
 }
 .h1_div h1{
     font-size: 34px;
     padding: 10px 0px;
-    color: #fdabc2;
+    color: #e2ebff;
 }
 div input{
     font-size: 20px;
@@ -38,7 +55,7 @@ div input{
     padding: 6px 0px;
 }
 div label{
-    color: #fdabc2;
+    color: #e2ebff;
     font-size: 20px;
 }
 #user_birthdate{
@@ -68,21 +85,21 @@ div label{
     transition: all 0.5s ease;
 }
 #login:hover{
-    background-color: #30010e;
-    color: #fdabc2;
+    background-color: #21007c;
+    color: #e2ebff;
 }
 .loin_page{
-    color: #fdabc2;
+    color: #e2ebff;
     font-size: 20px;
     display: flex;
 }
 .loin_page a{
     font-weight: bold;
     text-decoration: none;
-    color: #30010e;
+    color: #e2ebff;
     margin-left: 4px;
     transition: all .3s ease-in;
 }
 .loin_page a:hover{
-    color: #fdabc2;
+    color: rgb(61, 97, 255);
 }
