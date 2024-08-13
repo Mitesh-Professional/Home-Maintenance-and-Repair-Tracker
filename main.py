@@ -1,11 +1,10 @@
 import eel
 import sqlite3 as sql
 
-
 class DB:
     conn = sql.connect("todo_app.db")
     cur = conn.cursor()
-
+    user_info = ""
     def __init__(self):
         create_table_sql = '''
             CREATE TABLE IF NOT EXISTS login (
@@ -70,13 +69,17 @@ def button_signup(user_name, user_pass, user_birthdate, gender):
 def button_login(user_name, user_pass):
     sql = '''SELECT * FROM login WHERE email = ? AND password = ?'''
     data = (user_name, user_pass)
+    user_info = db_conn.sql_data_check(sql, data)
     if db_conn.sql_data_check(sql, data):
-        return True
+        db_conn.user_info = {'Email': user_info[0][1],'Status':True}
+        return {'Email': user_info[0][1],'Status':True}
     else:
         return False
-
-select_sql = 'SELECT * FROM login;'
-db_conn.search_file(select_sql)
+@eel.expose
+def user_profile_info():
+    return db_conn.user_info
+# select_sql = 'SELECT * FROM login;'
+# db_conn.search_file(select_sql)
 
 
 
