@@ -21,6 +21,15 @@ try {
         if(!result){
         alert("Your Email and Password Wrong!")}
         else{
+        window.location.href = './home.html';
         alert("Welcome, Home Maintenance and Repair Tracker")}})
     })
+}
+function card_view(){
+    let display_value=document.getElementsByClassName('profile_view')
+    if(window.getComputedStyle(display_value[0]).display == 'none'){
+        display_value[0].style.display = 'block'
+    }else{
+        display_value[0].style.display = 'none'
+    }
 }
