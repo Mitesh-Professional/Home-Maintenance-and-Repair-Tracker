@@ -37,9 +37,16 @@ function card_view() {
     }
 }
 if ("http://localhost:8000/src/components/home.html" == window.location.href) {
-console.log(email)
+    console.log(email)
     eel.user_profile_info()(function (result) {
-       email.innerHTML = result.Email
-       username.innerHTML = result.UserName
+        email.innerHTML = result.Email
+        username.innerHTML = result.UserName
+    })
+}
+function sing_out() {
+    eel.sign_out()(function (result) {
+        if (result) {
+            window.location.href = './login_page.html';
+        }
     })
 }
