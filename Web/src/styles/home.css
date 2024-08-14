@@ -29,9 +29,9 @@ nav{
 }
 .profile_section{
     color:white;
-    border-radius: 200px;
+    border-radius: 50%;
     background-color: rgb(134, 127, 127);
-    padding: 8px 4px;
+    padding: 8px 8px;
     cursor: pointer;
 }
 .profile_section h2{
@@ -91,7 +91,7 @@ nav{
 }
 .profile_logo_text{
     display: inline;
-    padding: 20px 12px;
+    padding: 20px 20px;
     border-radius: 50%;
     background-color: rgb(58, 119, 211);
 }

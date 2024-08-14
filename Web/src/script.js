@@ -5,6 +5,9 @@ let user_birthdate = document.getElementById('user_birthdate')
 let gender = document.getElementById('gender')
 let username = document.querySelector('#user_info_username')
 let email = document.querySelector('#user_info_email')
+let logo_inner_profile = document.querySelector('.profile_logo_text')
+let profile = document.querySelector('.profile')
+
 function onSubmit(e) {
     e.preventDefault()
     eel.button_signup(user_name.value, user_email.value, user_pass.value, user_birthdate.value, gender.value)(function (result) {
@@ -37,10 +40,13 @@ function card_view() {
     }
 }
 if ("http://localhost:8000/src/components/home.html" == window.location.href) {
-    console.log(email)
+    console.log(logo_inner_profile)
+    str = ""
     eel.user_profile_info()(function (result) {
         email.innerHTML = result.Email
         username.innerHTML = result.UserName
+        logo_inner_profile.innerHTML = result.UserName.slice(0,2)
+        profile.innerHTML = result.UserName.slice(0,2)
     })
 }
 function sing_out() {
