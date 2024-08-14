@@ -1,11 +1,13 @@
 let user_name = document.getElementById('user_name')
+let user_email = document.getElementById('user_email')
 let user_pass = document.getElementById('user_pass')
 let user_birthdate = document.getElementById('user_birthdate')
 let gender = document.getElementById('gender')
-let email = document.querySelector('#user_name_value')
+let username = document.querySelector('#user_info_username')
+let email = document.querySelector('#user_info_email')
 function onSubmit(e) {
     e.preventDefault()
-    eel.button_signup(user_name.value, user_pass.value, user_birthdate.value, gender.value)(function (result) {
+    eel.button_signup(user_name.value, user_email.value, user_pass.value, user_birthdate.value, gender.value)(function (result) {
         if (!result) {
             alert("Your Email ID already Exist!")
         }
@@ -16,14 +18,13 @@ function onSubmit(e) {
 }
 function onLogin(e) {
     e.preventDefault()
-    eel.button_login(user_name.value, user_pass.value)(function (result) {
-        if (!result.Status) {
-            alert("Your Email and Password Wrong!")
+    eel.button_login(user_email.value, user_pass.value)(function (result) {
+        if (!result.User_Verification) {
+            alert(result.Info)
         }
         else {
             window.location.href = './home.html';
-            alert("Welcome, Home Maintenance and Repair Tracker"
-            )
+            alert(`Welcome To Home Maintenance and Repair Tracker, ${result.UserName}!`)
         }
     })
 }
@@ -36,7 +37,9 @@ function card_view() {
     }
 }
 if ("http://localhost:8000/src/components/home.html" == window.location.href) {
+console.log(email)
     eel.user_profile_info()(function (result) {
        email.innerHTML = result.Email
+       username.innerHTML = result.UserName
     })
 }
