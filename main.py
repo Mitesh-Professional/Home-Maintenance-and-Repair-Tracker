@@ -3,12 +3,11 @@ import sqlite3 as sql
 import bcrypt
 import os
 
-
 class DB:
     conn = sql.connect("home_maintenance_and_repair_tracker.db")
     cur = conn.cursor()
     user_info = ""
-
+    path_directory = os.getcwd().replace('/','//')
     def __init__(self):
         create_table_sql = '''
                 CREATE TABLE IF NOT EXISTS login (
@@ -70,7 +69,7 @@ class DB:
             'Email': user_email,
             'User_Password': user_pass
         }
-        path = '//home//hp//PycharmProjects//OODO TRAINEE//.venv//Project//Home Maintenance and Repair Tracker//Web//src//'
+        path = f'{db_conn.path_directory}//Web//src//'
         directory = 'Cookies'
         path_final = os.path.join(path, directory)
         if not os.path.exists(path_final):
@@ -121,21 +120,21 @@ def button_login(user_email, user_pass):
         print(db_conn.user_info)
         return {'User_Verification': False, 'Info': 'Your email ID or password is incorrect.'}
 
-
+print(db_conn.path_directory)
 @eel.expose
 def user_profile_info():
     return db_conn.user_info
 @eel.expose
 def sign_out():
-    path = '//home//hp//PycharmProjects//OODO TRAINEE//.venv//Project//Home Maintenance and Repair Tracker//Web//src//Cookies//'
-    file = '//home//hp//PycharmProjects//OODO TRAINEE//.venv//Project//Home Maintenance and Repair Tracker//Web//src//Cookies//cookies.txt'
+    path = f'{db_conn.path_directory}//Web//src//Cookies//'
+    file = f'{db_conn.path_directory}//Web//src//Cookies//cookies.txt'
     if os.path.exists(path):
         os.remove(file)
         os.rmdir(path)
         return True
 
 
-path = '//home//hp//PycharmProjects//OODO TRAINEE//.venv//Project//Home Maintenance and Repair Tracker//Web//src//Cookies//cookies.txt'
+path = f'{db_conn.path_directory}//Web//src//Cookies//cookies.txt'
 if (os.path.exists(path)):
     dic ={}
     with open(path,'r') as file:
