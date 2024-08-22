@@ -8,6 +8,8 @@ let email = document.querySelector('#user_info_email')
 let logo_inner_profile = document.querySelector('.profile_logo_text')
 let profile = document.querySelector('.profile')
 let main_ul = document.querySelector('.default_section_ul')
+let toggleSwitch = document.querySelector('#check')
+
 let objs = {
     'Plumbing': ['Leaks', 'Water Heater Maintenance', 'Drainage', 'Pipe Inspections'],
     'Electrical': ['Outlets and Switches', 'Smoke and Carbon Monoxide Detectors', 'Lighting Fixtures', 'Wiring and Circuit Breakers'],
@@ -44,23 +46,25 @@ function onLogin(e) {
     })
 }
 
-for (obj in objs) {
-    let create_main_li = document.createElement('li')
-    let create_h2 = document.createElement('h2')
-    let navbar_dropdown_ul = document.createElement('ul')
-    create_main_li.className = 'li_repit'
-    create_h2.innerHTML = obj
-    create_main_li.appendChild(create_h2)
-    navbar_dropdown_ul.className = 'ul_repit'
-    main_ul.appendChild(create_main_li)
-    for(value of objs[obj]){
-        console.log(value)
-        let create_li = document.createElement('li')
-        create_li.className = 'default_product_list'
-        create_li.innerHTML = value
-        navbar_dropdown_ul.appendChild(create_li)
-        create_main_li.appendChild(navbar_dropdown_ul)
+for (let objKey in objs) {
+    let create_main_li = document.createElement('li');
+    let create_h2 = document.createElement('h2');
+    let navbar_dropdown_ul = document.createElement('ul');
+
+    create_main_li.className = 'li_repit';
+    create_h2.innerHTML = objKey;
+    create_main_li.appendChild(create_h2);
+    navbar_dropdown_ul.className = 'ul_repit';
+
+    for (let value of objs[objKey]) {
+        let create_li = document.createElement('li');
+        create_li.className = 'default_product_list';
+        create_li.innerHTML = value;
+        navbar_dropdown_ul.appendChild(create_li);
     }
+
+    create_main_li.appendChild(navbar_dropdown_ul);
+    main_ul.appendChild(create_main_li);
 }
 
 function card_view() {
@@ -72,13 +76,18 @@ function card_view() {
     }
 }
 if ("http://localhost:8000/src/components/home.html" == window.location.href) {
-    console.log(logo_inner_profile)
-    str = ""
     eel.user_profile_info()(function (result) {
         email.innerHTML = result.Email
         username.innerHTML = result.UserName
         logo_inner_profile.innerHTML = result.UserName.slice(0,2)
+        console.log(result)
         profile.innerHTML = result.UserName.slice(0,2)
+        if(result.Mode == "dark"){
+        toggleSwitch.checked = true
+        document.body.classList.add('dark-mode');
+        }else{
+        document.body.classList.remove('dark-mode');
+        }
     })
 }
 function sing_out() {
@@ -89,10 +98,8 @@ function sing_out() {
     })
 }
 function dark_mode(){
-    let toggle = document.querySelector('#check')
-    let toggleSwitch = document.querySelector('#check')
+//    let toggleSwitch = document.querySelector('#check')
     document.body.classList.toggle('dark-mode', toggleSwitch.checked);
-    toggleSwitch.addEventListener('change',()=>{
-        document.body.classList.toggle('dark-mode', toggleSwitch.checked);
-    })
+    let value = toggleSwitch.checked
+    eel.dark_mode(value)
 }

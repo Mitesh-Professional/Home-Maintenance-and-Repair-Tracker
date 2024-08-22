@@ -1,4 +1,0 @@
-Status: 0 
-UserName: Mitesh_Amin 
-Email: mitesh@gmail.com 
-User_Password: $2b$12$ByJgt89GYIfYPWCk0DgajeuVuRWbzD4uMTR.mkGeW5t8mvWNTMa6O 
